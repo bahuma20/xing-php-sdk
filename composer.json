@@ -1,6 +1,6 @@
 {
   "name": "bahuma/xing-php-sdk",
-  "description": "A PHP wrapper for the xing api",
+  "description": "A PHP wrapper for the XING api",
   "type": "library",
   "keywords": ["library", "composer"],
   "require": {
