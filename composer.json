@@ -1,0 +1,23 @@
+{
+  "name": "bahuma/xing-php-sdk",
+  "description": "A PHP wrapper for the xing api",
+  "type": "library",
+  "keywords": ["library", "composer"],
+  "require": {
+    "guzzlehttp/guzzle": "^6.1",
+    "guzzlehttp/oauth-subscriber": "^0.3.0"
+  },
+  "authors": [
+    {
+      "name": "Max Bachhuber",
+      "email": "bahuma20@bahuma.io"
+    }
+  ],
+  "homepage": "https://github.com/bahuma/xing-php-sdk",
+  "license": "Apache 2.0",
+  "autoload": {
+    "psr-0": {
+      "Bahuma\\XingAPI": "src"
+    }
+  }
+}

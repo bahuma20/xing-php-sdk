@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Composer template
+vendor/
+composer.lock
+composer.phar
+
+# IntelliJ project files
+.idea
+out
+gen
