@@ -1,5 +1,6 @@
 <?php
-require('./vendor/autoload.php');
+
+require './vendor/autoload.php';
 
 use Bahuma\XingSDK\XingSDK;
 
@@ -11,10 +12,10 @@ const CONSUMER_SECRET = '00a74956afa278e141e0e5070a04574c9020b858';
 
 if (!array_key_exists('tokens', $_SESSION)) {
     $_SESSION['tokens'] = [
-        'request_token' => '',
+        'request_token'        => '',
         'request_token_secret' => '',
-        'access_token' => '',
-        'access_token_secret' => '',
+        'access_token'         => '',
+        'access_token_secret'  => '',
     ];
 }
 
@@ -31,14 +32,15 @@ $default_xing_sdk = new XingSDK($default_config);
 
 $default_xing_client = $default_xing_sdk->getClient();
 
-function print_help() {
-    print 'Available Pages:<br>';
-    print '<ul>';
-    print '<li><a href="?page=connect">connect</a></li>';
-    print '<li><a href="?page=redirect">redirect</a></li>';
-    print '<li><a href="?page=getUserDetails">getUserDetails</a></li>';
-    print '<li><a href="?page=updateLanguageSkill">updateLanguageSkill</a></li>';
-    print '</ul>';
+function print_help()
+{
+    echo 'Available Pages:<br>';
+    echo '<ul>';
+    echo '<li><a href="?page=connect">connect</a></li>';
+    echo '<li><a href="?page=redirect">redirect</a></li>';
+    echo '<li><a href="?page=getUserDetails">getUserDetails</a></li>';
+    echo '<li><a href="?page=updateLanguageSkill">updateLanguageSkill</a></li>';
+    echo '</ul>';
 }
 
 if (!array_key_exists('page', $_GET)) {
@@ -47,7 +49,7 @@ if (!array_key_exists('page', $_GET)) {
 }
 
 switch ($_GET['page']) {
-    case "connect":
+    case 'connect':
         // leave the token empty
         $config = [
             'consumer_key'    => CONSUMER_KEY,
@@ -57,17 +59,16 @@ switch ($_GET['page']) {
         ];
 
         $xing_api = new XingSDK($config);
-        $result = $xing_api->getRequestToken("http://dev.bahuma.io/xing2?page=redirect");
+        $result = $xing_api->getRequestToken('http://dev.bahuma.io/xing2?page=redirect');
 
         $_SESSION['tokens']['request_token'] = $result['request_token'];
         $_SESSION['tokens']['request_token_secret'] = $result['request_token_secret'];
 
-        print '<a href="'. $result['authorize_url'] .'">Login</a>';
+        echo '<a href="'.$result['authorize_url'].'">Login</a>';
 
         break;
 
-
-    case "redirect":
+    case 'redirect':
         // Use the request token, which the getRequestToken Method returned.
         $config = [
             'consumer_key'    => CONSUMER_KEY,
@@ -84,23 +85,22 @@ switch ($_GET['page']) {
 
         break;
 
-    case "getUserDetails":
+    case 'getUserDetails':
         $response = $default_xing_client->get('users/me');
 
-        print '<pre>';
+        echo '<pre>';
         print_r(XingSDK::decodeResponse($response));
 
         break;
 
-    case "updateLanguageSkill":
+    case 'updateLanguageSkill':
         $response = $default_xing_client->put('users/me/languages/de', [
             'json' => [
                 'skill' => 'NATIVE',
             ],
         ]);
 
-
-        print '<pre>';
+        echo '<pre>';
         print_r(XingSDK::decodeResponse($response));
 
         break;
@@ -108,4 +108,3 @@ switch ($_GET['page']) {
     default:
         print_help();
 }
-
